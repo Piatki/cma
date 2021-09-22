@@ -1,0 +1,67 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block title %}База ЛПУ{% endblock title %}
+{% block content %}
+  <div class="container">
+    <div class="py-3 text-center">
+      <h1 class="mb-4">База Медучереждений</h1>
+      <div class="d-flex flex-column">
+        <form method="get">
+          <fieldset class="d-flex flex-column align-items-center">
+            <div class="d-flex justify-content-evenly my-3">
+              <div class="mx-2">
+                <label for="{{ lpus_filter.form.num_start.id_for_label }}">Поиск по названию</label>
+                {{ lpus_filter.form.num_start }}
+              </div>
+              <div class="mx-2">
+                <label for="{{ lpus_filter.form.contains.id_for_label }}">Поиск по адресу</label>
+                {{ lpus_filter.form.contains }}
+              </div>
+            </div>
+            <button class="btn btn-primary w-25" type="submit">Поиск</button>
+          </fieldset>
+        </form>
+        <div class="d-flex mt-4 justify-content-center">
+          <a href="{% url 'conteragent:addlpu' %}" class="btn btn-success mx-2">Добавить Клинику</a>
+        </div>
+      </div>
+    <table class="table mt-5">
+        <caption>Медучереждения</caption>
+        <thead>
+          <tr>
+            <th>Название/бренд</th>
+            <th>Город</th>
+            <th>Адресс</th>
+            <th>Категория</th>
+            <th>Изменить</th>
+            <th>Удалить</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for lpu in lpus %}
+          <tr>
+            <td>{{ lpu.name }}</td>
+            <td>{{ lpu.city }}</a></td>
+            <td>{{ lpu.address }}</td>
+            <td>{{ lpu.category }}</td>
+            <td><a href="{% url 'conteragent:editlpu' lpu.id %}" class="btn btn-sm btn-warning mx-2">Обновить</a></td>
+            <td><a href="{% url 'conteragent:dellpu' lpu.id %}" class="btn btn-sm btn-danger mx-2">Удалить</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <style>
+    tbody tr:hover {
+      background-color: #F6F2E7;
+    }
+  </style>
+<style>
+
+tbody tr:hover {
+  background-color: #F6F2E7;
+}
+  </style>>
+</body>
+{% endblock content %}

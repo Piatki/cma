@@ -1,0 +1,57 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block title %}список случаев клиента{% endblock title %}
+{% block content %}
+<body>
+  <div class="container">
+    <div class="py-3 text-center">
+      <form>
+        <fieldset class="row g-3 justify-content-center px-5" style="margin-top: 50px">
+          <div>
+            <a href="{% url 'clients:clientappeal' %}" class="btn">Добавить Случай</a>
+          </div>
+        </fieldset>
+      </form>
+      <table class="table mt-5">
+        <caption>Список случаев</caption>
+        <thead>
+          <tr>
+            <th>№</th>
+            <th>начало</th>
+            <th>завершение</th>
+            <th>Статус</th>
+            <th>Нозология</th>
+            <th>Диагноз</th>
+            <th>автор</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{case.num_case}}</td>
+            <td>{{case.date_start_appeal}}</td>
+            <td>{{case.date_finish_appeal}}</td>
+            <td>{{case.status}}</td>
+            <td>{{case.mkb_block}}</td>
+            <td>{{case.diagnoz}}</td>
+            <td><a href="/appeal/clientappeal" class="btn">Перейти</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<style>
+.btn {
+    display: inline-block; /* Строчно-блочный элемент */
+    background: blue; /* Серый цвет фона */
+    color: #fff; /* Белый цвет текста */
+    padding: 1rem 1.5rem; /* Поля вокруг текста */
+    text-decoration: none; /* Убираем подчёркивание */
+    border-radius: 3px; /* Скругляем уголки */
+   }
+
+tbody tr:hover {
+  background-color: #F6F2E7;
+}
+</style>
+</body>
+{% endblock content %}

@@ -1,0 +1,54 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block title %}База договоров{% endblock title %}
+{% block content %}
+ <div class="container">
+    <div class="py-3 text-center">
+      <h1 class="mb-4">База Договоров</h1>
+      <div class="d-flex flex-column">
+        <form method="get">
+          <fieldset class="d-flex flex-column align-items-center">
+            <div class="d-flex justify-content-evenly my-3">
+              <div class="mx-2">
+                <label for="{{ contracts_filter.form.num_start.id_for_label }}">Поиск по названию</label>
+                {{ contracts_filter.form.num_start }}
+              </div>
+            </div>
+            <button class="btn btn-primary w-25" type="submit">Поиск</button>
+          </fieldset>
+        </form>
+        <div class="d-flex mt-4 justify-content-center">
+          <a href="{% url 'contractbase:addcontract' %}" class="btn btn-success mx-2">Добавить Договор</a>
+        </div>
+      </div>
+    <table class="table mt-5">
+        <caption>Договора</caption>
+        <thead>
+          <tr>
+            <th>Название договора</th>
+            <th>Смотреть</th>
+            <th>Редактировать</th>
+            <th>Удалить</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for contract in contracts %}
+          <tr>
+            <td>{{ contract.name }}</td>
+            <td><a href="{% url 'contractbase:contractread' contract.id %}" class="btn btn-sm btn-warning mx-2">Смотреть</a></td
+            <td><a href="{% url 'contractbase:editcontract' contract.id %}" class="btn btn-sm btn-warning mx-2">Редактировать</a></td>
+            <td><a href="{% url 'contractbase:delcontract' contract.id %}" class="btn btn-sm btn-danger mx-2">Удалить</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <style>
+    tbody tr:hover {
+      background-color: #F6F2E7;
+    }
+  </style>
+<style>
+
+{% endblock content %}

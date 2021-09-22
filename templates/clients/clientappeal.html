@@ -1,0 +1,119 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block title %}обращение клиента{% endblock title %}
+{% block content %}
+<body>
+  <div class="container">
+    <div class="py-3 text-center">
+      <form>
+        <fieldset class="row g-3 justify-content-left px-5" style="margin-top: 50px">
+          <div class="col-3">
+            <label for="№" class="form-label">№ случая</label>
+            <input placeholder="№ Случая" id="№" class="form-control" type="number">
+            <div class="custom-select" style="width: 245px">
+              <select>
+                <option value="0">Выберете МКБ блок</option>
+                {% for mkb in mkbs %}
+                <option value="1">{{mkb.name_mkb}}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <input placeholder="Диагноз" id="diagnoz" class="form-control" type="text" style="margin-top: 20px">
+          </div>
+            <textarea class="area" name="" id="area" cols="30" rows="10" disabled>
+                № полиса:{{client.police_num}}
+                Имя:{{client.name}}
+                Дата рождения:{{client.date_birthday}}
+                Номер телефона:{{client.phone_number}}
+            </textarea>
+          <div class="col-3">
+            <a href="/appeal/formappeal" class="btn">Создать обращение</a>
+          </div>
+        </fieldset>
+      </form>
+      <table class="table mt-5">
+        <caption>Cписок обращений</caption>
+        <thead>
+          <tr>
+            <th>дата записи</th>
+            <th>инф о обращении</th>
+            <th>задача</th>
+            <th>автор</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{clientappeal.date_create}}</td>
+            <td>{{clientappeal.info}}</td>
+            <td>{{clientappeal.task}}</td>
+            <td>{{clientappeal.author}}</td>
+            <td><button id="port1" class="btn btn-sm btn-danger">Перейти</button></td>
+            <td><button id="port2" class="btn btn-sm btn-danger">копировать</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+<style>
+.btn {
+    display: inline-block; /* Строчно-блочный элемент */
+    background: blue; /* Серый цвет фона */
+    color: #fff; /* Белый цвет текста */
+    padding: 1rem 1.5rem; /* Поля вокруг текста */
+    text-decoration: none; /* Убираем подчёркивание */
+    border-radius: 3px; /* Скругляем уголки */
+   }
+.custom-select {
+    position: relative;
+    margin-top: 20px;
+}
+.custom-select select {
+    display: none;
+}
+.select-selected {
+    background-color: DodgerBlue;
+}
+.select-selected:after {
+    position: absolut;
+    content: "";
+    top: 14px;
+    right; 10px;
+    width; 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-color: #fff transparent transparent transparent;
+}
+.select-selected.select-arrow-active:after {
+    border-color: transparent transparent #fff transparent;
+    top: 7px;
+}
+.select-items div,.select-selected {
+    color: #ffffff;
+    padding: 8px 16px;
+    border: 1px solid transparent;
+    border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+    cursor: pointer;
+    user-select: none;
+}
+.select-items {
+    position: absolut;
+    background-color: DodgerBlue;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 99;
+}
+.select-hide {
+    display: none;
+}
+.select-items div:hover, .same-as-selected {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+.tbody tr:hover {
+  background-color: #F6F2E7;
+}
+</style>
+  <script src="{% static 'js/custom_select.js' %}"></script>
+</body>
+{% endblock content %}

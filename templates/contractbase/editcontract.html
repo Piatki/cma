@@ -1,0 +1,44 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block title %}форма редактирования договора{% endblock title %}
+{% block content %}
+<section class="py-5 text-center container main-box">
+        <div class="row">
+          <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">Добавление нового договора</h1>
+            <div style="text-align: left" class="form-box">
+                <form method="post" action="" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-template">
+                        {% for field in form %}
+                            <div class="form-group">
+                                {{ field.label_tag }}
+                                <div>{{ field }}</div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <p style="margin-top: 20px">
+                        <input id="b1" type="submit" value="отправить" class="btn btn-success">
+                        <input id="b2" type="submit" value="очистить" class="btn btn-success">
+                    </p>
+                </form>
+            </div>
+          </div>
+        </div>
+</section>
+    <style>
+        .main-box {
+            padding-top: 0px;
+        }
+        .main-box .row {
+            padding-top: 0px;
+        }
+        .form-box {
+            margin-top: 30px;
+        }
+        .form-group input {
+            width: adapt;
+            height: adapt;
+        }
+    </style>
+{% endblock content %}
